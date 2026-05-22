@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerHub | Job Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">C</span>
+        CareerHub
+      </a>
+
+      <button class="menu-button" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-links">
+        <a href="#jobs">Job Listings</a>
+        <a href="#filters">Search Filters</a>
+        <a href="#apply">Apply Form</a>
+        <a href="#dashboard">Employer Dashboard</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+          <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+          <span class="theme-toggle-text">Dark</span>
+        </button>
+        <a class="button secondary" href="jobs.html">Browse Jobs</a>
+        <a class="button primary" href="apply.html">Apply Now</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <p class="eyebrow">Find better work faster</p>
+          <h1>Connect with jobs that match your skills.</h1>
+          <p class="hero-copy">CareerHub helps candidates discover roles, filter openings by fit, apply with a focused form, and gives employers a clear dashboard for managing applications.</p>
+
+          <form class="search-panel" action="#jobs">
+            <div class="field">
+              <label for="hero-keyword">Job title or keyword</label>
+              <input id="hero-keyword" type="search" placeholder="Frontend Developer">
+            </div>
+            <div class="field">
+              <label for="hero-location">Location</label>
+              <input id="hero-location" type="search" placeholder="Remote">
+            </div>
+            <button class="button primary" type="submit">Search Jobs</button>
+          </form>
+        </div>
+
+        <figure class="hero-visual">
+          <img src="images/hero-hiring.png" alt="Modern hiring dashboard on a laptop in a bright office">
+          <figcaption>
+            <strong>126</strong>
+            New applications this week
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section-inner" aria-labelledby="features-title">
+      <h2 id="features-title">Core Features</h2>
+      <p class="section-lead">Everything needed for a simple job portal experience: listings, filtering, applications, and employer-side tracking.</p>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-icon">01</span>
+          <h3>Job Listings</h3>
+          <p>Show current openings with role details, location, type, salary range, and quick apply actions.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">02</span>
+          <h3>Apply Form</h3>
+          <p>Collect candidate details, resume links, experience, and cover notes in one clean form.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">03</span>
+          <h3>Search Filters</h3>
+          <p>Let candidates narrow jobs by keyword, role type, location, and experience level.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">04</span>
+          <h3>Employer Dashboard</h3>
+          <p>Give hiring teams a snapshot of posted jobs, new applications, and interview progress.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-inner" id="jobs" aria-labelledby="jobs-title">
+      <h2 id="jobs-title">Job Listings</h2>
+      <p class="section-lead">Browse sample openings and use the filters to narrow the visible results.</p>
+
+      <figure class="section-image wide">
+        <img src="images/job-listings.png" alt="Laptop displaying organized job listing cards and filters">
+      </figure>
+
+      <div class="jobs-layout" id="filters">
+        <aside class="filters" aria-label="Search filters">
+          <h3>Search Filters</h3>
+          <form data-filter-form>
+            <div class="field">
+              <label for="keyword">Keyword</label>
+              <input id="keyword" name="keyword" type="search" placeholder="Designer, HR, Developer">
+            </div>
+            <div class="field">
+              <label for="type">Job Type</label>
+              <select id="type" name="type">
+                <option value="">All types</option>
+                <option value="full-time">Full-time</option>
+                <option value="part-time">Part-time</option>
+                <option value="remote">Remote</option>
+              </select>
+            </div>
+            <button class="button primary" type="submit">Apply Filters</button>
+          </form>
+        </aside>
+
+        <div class="job-list">
+          <article class="job-card" data-job-card data-type="remote">
+            <div>
+              <h3>Frontend Developer</h3>
+              <p>Build responsive interfaces for a fast-growing SaaS team.</p>
+              <div class="job-meta">
+                <span>Remote</span>
+                <span>3+ years</span>
+                <span>₹8L - ₹14L</span>
+              </div>
+            </div>
+            <a class="button secondary" href="#apply">Apply</a>
+          </article>
+
+          <article class="job-card" data-job-card data-type="full-time">
+            <div>
+              <h3>HR Executive</h3>
+              <p>Coordinate hiring pipelines, onboarding, and employee records.</p>
+              <div class="job-meta">
+                <span>Bengaluru</span>
+                <span>Full-time</span>
+                <span>1+ years</span>
+              </div>
+            </div>
+            <a class="button secondary" href="#apply">Apply</a>
+          </article>
+
+          <article class="job-card" data-job-card data-type="part-time">
+            <div>
+              <h3>Content Writer</h3>
+              <p>Create job guides, company profiles, and candidate resources.</p>
+              <div class="job-meta">
+                <span>Hybrid</span>
+                <span>Part-time</span>
+                <span>Freshers welcome</span>
+              </div>
+            </div>
+            <a class="button secondary" href="#apply">Apply</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-inner" id="apply" aria-labelledby="apply-title">
+      <h2 id="apply-title">Apply Form</h2>
+      <p class="section-lead">A focused application form for candidate information and resume submission.</p>
+
+      <div class="apply-layout">
+        <div class="form-panel">
+          <form>
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input id="name" type="text" placeholder="Your name">
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="you@example.com">
+            </div>
+            <div class="field">
+              <label for="role">Role Applying For</label>
+              <input id="role" type="text" placeholder="Frontend Developer">
+            </div>
+            <div class="field">
+              <label for="resume">Resume Link</label>
+              <input id="resume" type="url" placeholder="https://">
+            </div>
+            <div class="field">
+              <label for="message">Cover Note</label>
+              <textarea id="message" placeholder="Tell the employer why you are a strong fit"></textarea>
+            </div>
+            <button class="button primary" type="submit">Submit Application</button>
+          </form>
+        </div>
+
+        <aside class="side-stack">
+          <figure class="section-image">
+            <img src="images/apply-form.png" alt="Candidate filling an online job application form on a laptop">
+          </figure>
+          <div class="hero-card">
+            <h3>Application Tips</h3>
+            <p>Keep your resume link public, mention relevant skills, and tailor your note to the role requirements.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section-inner" id="dashboard" aria-labelledby="dashboard-title">
+      <h2 id="dashboard-title">Employer Dashboard</h2>
+      <p class="section-lead">A snapshot view for employers to track hiring activity and candidate progress.</p>
+
+      <div class="dashboard-panel">
+        <figure class="dashboard-image">
+          <img src="images/employer-dashboard.png" alt="Employer recruiting dashboard with application analytics">
+        </figure>
+
+        <div class="dashboard-grid">
+          <div class="metric">
+            <strong>18</strong>
+            Active Jobs
+          </div>
+          <div class="metric">
+            <strong>126</strong>
+            Applications
+          </div>
+          <div class="metric">
+            <strong>24</strong>
+            Interviews
+          </div>
+        </div>
+
+        <ul class="status-list">
+          <li>
+            <span>Frontend Developer</span>
+            <span class="tag">12 new</span>
+          </li>
+          <li>
+            <span>HR Executive</span>
+            <span class="tag">6 shortlisted</span>
+          </li>
+          <li>
+            <span>Content Writer</span>
+            <span class="tag">4 interviews</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">C</span>
+          CareerHub
+        </a>
+        <p>CareerHub connects candidates with better opportunities and helps employers manage hiring from one simple portal.</p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Portal</h3>
+        <a href="#jobs">Job Listings</a>
+        <a href="#filters">Search Filters</a>
+        <a href="#apply">Apply Form</a>
+        <a href="#dashboard">Employer Dashboard</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <a href="mailto:support@careerhub.com">support@careerhub.com</a>
+        <a href="tel:+911234567890">+91 12345 67890</a>
+        <span>Bengaluru, India</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 CareerHub. All rights reserved.</p>
+      <p>Built for candidates and employers.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
