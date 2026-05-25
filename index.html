@@ -46,14 +46,14 @@
           <h1>Connect with jobs that match your skills.</h1>
           <p class="hero-copy">CareerHub helps candidates discover roles, filter openings by fit, apply with a focused form, and gives employers a clear dashboard for managing applications.</p>
 
-          <form class="search-panel" action="#jobs">
+          <form class="search-panel" action="#jobs" data-hero-search>
             <div class="field">
               <label for="hero-keyword">Job title or keyword</label>
-              <input id="hero-keyword" type="search" placeholder="Frontend Developer">
+              <input id="hero-keyword" name="keyword" type="search" placeholder="Frontend Developer">
             </div>
             <div class="field">
               <label for="hero-location">Location</label>
-              <input id="hero-location" type="search" placeholder="Remote">
+              <input id="hero-location" name="location" type="search" placeholder="Remote">
             </div>
             <button class="button primary" type="submit">Search Jobs</button>
           </form>
@@ -114,6 +114,10 @@
               <input id="keyword" name="keyword" type="search" placeholder="Designer, HR, Developer">
             </div>
             <div class="field">
+              <label for="location">Location</label>
+              <input id="location" name="location" type="search" placeholder="Remote, Bengaluru">
+            </div>
+            <div class="field">
               <label for="type">Job Type</label>
               <select id="type" name="type">
                 <option value="">All types</option>
@@ -127,7 +131,7 @@
         </aside>
 
         <div class="job-list">
-          <article class="job-card" data-job-card data-type="remote">
+          <article class="job-card" data-job-card data-type="remote" data-location="remote india">
             <div>
               <h3>Frontend Developer</h3>
               <p>Build responsive interfaces for a fast-growing SaaS team.</p>
@@ -137,10 +141,10 @@
                 <span>₹8L - ₹14L</span>
               </div>
             </div>
-            <a class="button secondary" href="#apply">Apply</a>
+            <a class="button secondary" href="job-details.html">View Details</a>
           </article>
 
-          <article class="job-card" data-job-card data-type="full-time">
+          <article class="job-card" data-job-card data-type="full-time" data-location="bengaluru india">
             <div>
               <h3>HR Executive</h3>
               <p>Coordinate hiring pipelines, onboarding, and employee records.</p>
@@ -150,10 +154,10 @@
                 <span>1+ years</span>
               </div>
             </div>
-            <a class="button secondary" href="#apply">Apply</a>
+            <a class="button secondary" href="job-details.html">View Details</a>
           </article>
 
-          <article class="job-card" data-job-card data-type="part-time">
+          <article class="job-card" data-job-card data-type="part-time" data-location="hybrid india">
             <div>
               <h3>Content Writer</h3>
               <p>Create job guides, company profiles, and candidate resources.</p>
@@ -163,8 +167,10 @@
                 <span>Freshers welcome</span>
               </div>
             </div>
-            <a class="button secondary" href="#apply">Apply</a>
+            <a class="button secondary" href="job-details.html">View Details</a>
           </article>
+
+          <p class="no-results" data-no-results hidden>No jobs matched your search. Try a different keyword, location, or job type.</p>
         </div>
       </div>
     </section>
