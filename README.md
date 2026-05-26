@@ -5,13 +5,13 @@ A modern job portal website for browsing and applying to job listings.
 ## Features
 - Browse available job listings
 - Job search and filtering
-- Job application functionality
+- Combined login and registration section
 - Responsive design
 
 ## Files
 - `index.html` - Main landing page
 - `jobs.html` - Jobs listing page
-- `apply.html` - Job application form
+- `apply.html` - Account section shortcut page
 - `css/style.css` - Stylesheet
 - `js/main.js` - JavaScript functionality
 - `images/` - Image assets

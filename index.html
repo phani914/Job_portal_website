@@ -23,7 +23,6 @@
       <div class="nav-links">
         <a href="#jobs">Job Listings</a>
         <a href="#filters">Search Filters</a>
-        <a href="#apply">Apply Form</a>
         <a href="#dashboard">Employer Dashboard</a>
       </div>
 
@@ -33,7 +32,7 @@
           <span class="theme-toggle-text">Dark</span>
         </button>
         <a class="button secondary" href="jobs.html">Browse Jobs</a>
-        <a class="button primary" href="apply.html">Apply Now</a>
+        <a class="button primary" href="#account">Login / Register</a>
       </div>
     </nav>
   </header>
@@ -81,8 +80,8 @@
         </article>
         <article class="feature-card">
           <span class="feature-icon">02</span>
-          <h3>Apply Form</h3>
-          <p>Collect candidate details, resume links, experience, and cover notes in one clean form.</p>
+          <h3>Account Access</h3>
+          <p>Let candidates login or register from one place before managing job activity.</p>
         </article>
         <article class="feature-card">
           <span class="feature-icon">03</span>
@@ -175,46 +174,48 @@
       </div>
     </section>
 
-    <section class="section-inner" id="apply" aria-labelledby="apply-title">
-      <h2 id="apply-title">Apply Form</h2>
-      <p class="section-lead">A focused application form for candidate information and resume submission.</p>
+    <section class="section-inner" id="account" aria-labelledby="account-title">
+      <h2 id="account-title">Login / Registration</h2>
+      <p class="section-lead">Access your CareerHub account or create a new profile to manage applications and job alerts.</p>
 
-      <div class="apply-layout">
-        <div class="form-panel">
+      <div class="account-layout">
+        <div class="form-panel account-panel">
+          <h3>Login Details</h3>
           <form>
             <div class="field">
-              <label for="name">Full Name</label>
-              <input id="name" type="text" placeholder="Your name">
+              <label for="login-email">Email</label>
+              <input id="login-email" type="email" placeholder="you@example.com">
             </div>
             <div class="field">
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="you@example.com">
+              <label for="login-password">Password</label>
+              <input id="login-password" type="password" placeholder="Enter password">
             </div>
-            <div class="field">
-              <label for="role">Role Applying For</label>
-              <input id="role" type="text" placeholder="Frontend Developer">
-            </div>
-            <div class="field">
-              <label for="resume">Resume Link</label>
-              <input id="resume" type="url" placeholder="https://">
-            </div>
-            <div class="field">
-              <label for="message">Cover Note</label>
-              <textarea id="message" placeholder="Tell the employer why you are a strong fit"></textarea>
-            </div>
-            <button class="button primary" type="submit">Submit Application</button>
+            <button class="button primary" type="submit">Login</button>
           </form>
         </div>
 
-        <aside class="side-stack">
-          <figure class="section-image">
-            <img src="images/apply-form.png" alt="Candidate filling an online job application form on a laptop">
-          </figure>
-          <div class="hero-card">
-            <h3>Application Tips</h3>
-            <p>Keep your resume link public, mention relevant skills, and tailor your note to the role requirements.</p>
-          </div>
-        </aside>
+        <div class="form-panel account-panel">
+          <h3>Registration Information</h3>
+          <form>
+            <div class="field">
+              <label for="register-name">Full Name</label>
+              <input id="register-name" type="text" placeholder="Your name">
+            </div>
+            <div class="field">
+              <label for="register-email">Email</label>
+              <input id="register-email" type="email" placeholder="you@example.com">
+            </div>
+            <div class="field">
+              <label for="register-phone">Phone Number</label>
+              <input id="register-phone" type="tel" placeholder="+91 98765 43210">
+            </div>
+            <div class="field">
+              <label for="register-password">Create Password</label>
+              <input id="register-password" type="password" placeholder="Create password">
+            </div>
+            <button class="button primary" type="submit">Register</button>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -274,7 +275,7 @@
         <h3>Portal</h3>
         <a href="#jobs">Job Listings</a>
         <a href="#filters">Search Filters</a>
-        <a href="#apply">Apply Form</a>
+        <a href="#account">Login / Registration</a>
         <a href="#dashboard">Employer Dashboard</a>
       </div>
 
