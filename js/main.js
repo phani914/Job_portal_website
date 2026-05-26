@@ -3,10 +3,13 @@ const navbar = document.querySelector(".navbar");
 const themeToggle = document.querySelector(".theme-toggle");
 const themeToggleIcon = document.querySelector(".theme-toggle-icon");
 const themeToggleText = document.querySelector(".theme-toggle-text");
-const filterForm = document.querySelector("[data-filter-form]");
+const filterForms = document.querySelectorAll("[data-filter-form]");
 const heroSearchForm = document.querySelector("[data-hero-search]");
 const jobCards = document.querySelectorAll("[data-job-card]");
 const noResultsMessage = document.querySelector("[data-no-results]");
+const applyForm = document.querySelector("[data-apply-form]");
+const applySuccessMessage = document.querySelector("[data-apply-success]");
+const validationForms = document.querySelectorAll("[data-validate-form]");
 
 const savedTheme = localStorage.getItem("careerhub-theme");
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -63,6 +66,117 @@ if (themeToggle) {
 
 const normalize = (value) => String(value || "").toLowerCase().trim();
 
+const getFormMessage = (form) => {
+  let message = form.querySelector("[data-form-message]");
+
+  if (!message) {
+    message = document.createElement("p");
+    message.className = "form-message";
+    message.dataset.formMessage = "";
+    form.append(message);
+  }
+
+  return message;
+};
+
+const setFormMessage = (form, text, type = "error") => {
+  const message = getFormMessage(form);
+
+  message.textContent = text;
+  message.dataset.type = type;
+  message.hidden = false;
+};
+
+const clearFormMessage = (form) => {
+  const message = form.querySelector("[data-form-message]");
+
+  if (message) {
+    message.hidden = true;
+    message.textContent = "";
+  }
+};
+
+const markInvalidField = (field) => {
+  field.classList.add("is-invalid");
+  field.setAttribute("aria-invalid", "true");
+};
+
+const clearInvalidField = (field) => {
+  field.classList.remove("is-invalid");
+  field.removeAttribute("aria-invalid");
+};
+
+const getFieldLabel = (field) => {
+  const label = field.id ? document.querySelector(`label[for="${field.id}"]`) : null;
+
+  return (label?.textContent || field.name || "This field").replace("*", "").trim();
+};
+
+const getValidationMessage = (field) => {
+  const label = getFieldLabel(field);
+
+  if (field.validity.valueMissing) return `${label} is required.`;
+  if (field.validity.typeMismatch) return `Enter a valid ${label.toLowerCase()}.`;
+  if (field.validity.patternMismatch) return `${label} has an invalid format.`;
+  if (field.validity.tooShort) return `${label} must be at least ${field.minLength} characters.`;
+  if (field.validity.tooLong) return `${label} must be ${field.maxLength} characters or fewer.`;
+
+  return field.validationMessage || `${label} is invalid.`;
+};
+
+const validateRequiredSearch = (form) => {
+  if (!form.matches("[data-search-required]")) {
+    return true;
+  }
+
+  const data = getSearchValues(form);
+  const hasSearchValue = Boolean(data.keyword || data.location || data.type);
+
+  if (!hasSearchValue) {
+    setFormMessage(form, "Enter a keyword, location, or job type to search.");
+  } else {
+    clearFormMessage(form);
+  }
+
+  return hasSearchValue;
+};
+
+const validateForm = (form) => {
+  clearFormMessage(form);
+
+  const invalidField = Array.from(form.elements).find((field) => {
+    if (!(field instanceof HTMLElement) || field.disabled || !("validity" in field)) {
+      return false;
+    }
+
+    if (field.checkValidity()) {
+      clearInvalidField(field);
+      return false;
+    }
+
+    markInvalidField(field);
+    return true;
+  });
+
+  if (invalidField) {
+    setFormMessage(form, getValidationMessage(invalidField));
+    invalidField.focus();
+    return false;
+  }
+
+  return validateRequiredSearch(form);
+};
+
+document.querySelectorAll("form").forEach((form) => {
+  form.addEventListener("input", (event) => {
+    const field = event.target;
+
+    if (field instanceof HTMLElement && "validity" in field && field.checkValidity()) {
+      clearInvalidField(field);
+    }
+  });
+});
+
 const getSearchValues = (form) => {
   const data = new FormData(form);
 
@@ -97,17 +211,19 @@ const applyJobSearch = ({ keyword = "", location = "", type = "" }) => {
 };
 
 const syncFormValues = ({ keyword = "", location = "", type = "" }) => {
-  if (!filterForm) {
+  if (!filterForms.length) {
     return;
   }
 
-  const keywordInput = filterForm.querySelector('[name="keyword"]');
-  const locationInput = filterForm.querySelector('[name="location"]');
-  const typeInput = filterForm.querySelector('[name="type"]');
+  filterForms.forEach((form) => {
+    const keywordInput = form.querySelector('[name="keyword"]');
+    const locationInput = form.querySelector('[name="location"]');
+    const typeInput = form.querySelector('[name="type"]');
 
-  if (keywordInput) keywordInput.value = keyword;
-  if (locationInput) locationInput.value = location;
-  if (typeInput) typeInput.value = type;
+    if (keywordInput) keywordInput.value = keyword;
+    if (locationInput) locationInput.value = location;
+    if (typeInput) typeInput.value = type;
+  });
 };
 
 if (jobCards.length) {
@@ -128,6 +244,10 @@ if (heroSearchForm) {
   heroSearchForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
+    if (!validateForm(heroSearchForm)) {
+      return;
+    }
+
     const searchValues = getSearchValues(heroSearchForm);
     syncFormValues(searchValues);
     applyJobSearch(searchValues);
@@ -139,16 +259,58 @@ if (heroSearchForm) {
   });
 }
 
-if (filterForm && jobCards.length) {
-  const runFilter = () => {
-    applyJobSearch(getSearchValues(filterForm));
+if (filterForms.length && jobCards.length) {
+  const runFilter = (form) => {
+    clearFormMessage(form);
+    applyJobSearch(getSearchValues(form));
   };
 
-  filterForm.addEventListener("submit", (event) => {
+  filterForms.forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (validateForm(form)) {
+        runFilter(form);
+      }
+    });
+
+    form.addEventListener("input", () => runFilter(form));
+    form.addEventListener("change", () => runFilter(form));
+  });
+}
+
+if (applyForm) {
+  applyForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    runFilter();
+
+    if (applySuccessMessage) {
+      applySuccessMessage.hidden = true;
+    }
+
+    if (!validateForm(applyForm)) {
+      return;
+    }
+
+    applyForm.reset();
+
+    if (applySuccessMessage) {
+      applySuccessMessage.hidden = false;
+      applySuccessMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  });
+}
+
+validationForms.forEach((form) => {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!validateForm(form)) {
+      return;
+    }
+
+    setFormMessage(form, form.dataset.successMessage || "Submitted successfully.", "success");
+    form.reset();
   });
 
-  filterForm.addEventListener("input", runFilter);
-  filterForm.addEventListener("change", runFilter);
-}
+  form.addEventListener("input", () => clearFormMessage(form));
+});
